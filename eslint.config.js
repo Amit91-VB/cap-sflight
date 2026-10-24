@@ -6,14 +6,14 @@ const globals = require('globals')
 
 module.exports = [
   {
-    ignores: ["**/dist/*", "gen/**/*", "@cds-models/**/*", "app/**/*"],
+    ignores: ["**/dist/*", "gen/**/*", "@cds-models/**/*", "app/**/*", "demos/*/output/**/*", "demos/*/generated/**/*"],
   },
   // global rules for all files
   eslint_js.configs.recommended,
   tseslint.configs.base,
   // Generic config for JavaScript files: Setup environment, version, etc.
   {
-    files: ["**/*.js", "**/*.ts"],
+    files: ["**/*.js", "**/*.mjs", "**/*.ts"],
     languageOptions: {
       ecmaVersion: 2022,
       sourceType: "module",

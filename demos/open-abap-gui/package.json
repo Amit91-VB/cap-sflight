@@ -1,0 +1,20 @@
+{
+  "name": "open-abap-gui-demo",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Classic ABAP report with selection screen, dynpro and ALV grid, run off-stack with open-abap-gui",
+  "type": "module",
+  "scripts": {
+    "convert": "open-abap-gui-convert",
+    "check": "open-abap-gui-convert --check --diagnostics json",
+    "build": "npm run convert && abap_transpile abap_transpile.json",
+    "start": "npm run build && node express.mjs"
+  },
+  "devDependencies": {
+    "@abaplint/database-sqlite": "2.13.83",
+    "@abaplint/open-abap-gui-converter": "0.1.47",
+    "@abaplint/runtime": "2.14.10",
+    "@abaplint/transpiler-cli": "2.14.10",
+    "express": "^4.22.3"
+  }
+}
