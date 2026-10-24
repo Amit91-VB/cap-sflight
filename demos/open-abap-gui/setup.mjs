@@ -5,7 +5,7 @@ import {SQLiteDatabaseClient} from "@abaplint/database-sqlite";
 // report and the Fiori app show the same rows.
 const dataFolder = new URL("../../db/data/", import.meta.url);
 
-function readCsv(name) {
+export function readCsv(name) {
   const [header, ...lines] = readFileSync(new URL(name, dataFolder), "utf8").trim().split(/\r?\n/);
   const columns = header.split(";");
   return lines.map(line => Object.fromEntries(line.split(";").map((value, i) => [columns[i], value])));

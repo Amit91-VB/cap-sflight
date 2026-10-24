@@ -29,6 +29,8 @@ The first build clones open-abap-core, express-icf-shim, open-abap-bal and open-
 | `setup.mjs` | Creates the SQLite schema and loads the CAP CSV files |
 | `express.mjs` | Serves the workbench through express-icf-shim |
 | `abap_transpile.json` | Config for both the converter and the transpiler |
+| `tests/zfld.spec.mjs` | Playwright smoke test |
+| `playwright.config.mjs` | Starts the server for the tests on port 3123 |
 
 All ABAP files use the abapGit layout, so you can pull them into a real system with abapGit.
 
@@ -48,6 +50,19 @@ npm run build    # convert and transpile
 npm start        # build and serve
 npx open-abap-gui-convert --program ZFLIGHT_DEMO --check --diagnostics json
 ```
+
+## Smoke test
+
+`tests/zfld.spec.mjs` drives the report in Chromium with Playwright. It starts the server itself, runs the transaction and checks the selection screen, the grid, double click, the Details button and Back. It also fails on any JavaScript error in the page.
+
+```sh
+npm run install:browser   # once, downloads Chromium for Playwright
+npm run test:e2e          # build, then run the tests
+npm test                  # run the tests against the current build
+npx playwright show-report
+```
+
+The expected rows are computed from the same CSV files the database is loaded from, so the test still holds if the sample data changes. Each test fails on its own when the behavior it covers breaks. For example, removing the `BT` workaround below fails the airline range test.
 
 ## Known gaps worked around in the report
 
